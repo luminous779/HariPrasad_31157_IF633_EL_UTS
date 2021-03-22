@@ -16,7 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginPage"
-            android:label="Login"
+            android:label="Sign In"
             android:parentActivityName=".MainActivity">
         </activity>
         <activity android:name=".ProfilePage"

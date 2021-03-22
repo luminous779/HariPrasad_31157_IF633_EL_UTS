@@ -102,7 +102,6 @@ public class SongViewAdapter extends RecyclerView.Adapter<SongViewAdapter.MyView
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // send selected contact in callback
                     listener.onSongSelected(mSongListFiltered.get(getAdapterPosition()));
                 }
             });

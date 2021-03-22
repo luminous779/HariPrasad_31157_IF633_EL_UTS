@@ -100,6 +100,13 @@ public class ListSong extends AppCompatActivity implements
         }
     }
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mMediaPlayer.stop();
+        mMediaPlayer.release();
+        mMediaPlayer = null;
+    }
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.option_menu, menu);
@@ -111,8 +118,10 @@ public class ListSong extends AppCompatActivity implements
             startActivity(new Intent(this, LoginProfile.class));
         } else if (item.getItemId() == R.id.logout) {
             startActivity(new Intent(this, MainActivity.class));
+            mMediaPlayer.stop();
+            mMediaPlayer.release();
+            mMediaPlayer = null;
         }else {
-            Log.d(this.getClass().getName(), "Option selected");
             super.onBackPressed();
         }
         return true;
@@ -131,8 +140,8 @@ public class ListSong extends AppCompatActivity implements
         mIvPlay = findViewById(R.id.iv_play);
         mIvPrevious = findViewById(R.id.iv_previous);
         mIvNext = findViewById(R.id.iv_next);
-        mTvTitle = findViewById(R.id.tv_title);
-        mTvCurrentDuration = findViewById(R.id.songCurrentDurationLabel);
+        mTvTitle = findViewById(R.id.title);
+        mTvCurrentDuration = findViewById(R.id.Duration);
         mTvTotalDuration = findViewById(R.id.songTotalDurationLabel);
         songProgressBar = findViewById(R.id.songProgressBar);
     }
@@ -155,12 +164,10 @@ public class ListSong extends AppCompatActivity implements
         mMediaPlayer.setOnCompletionListener(this);
     }
     private void getSongList(){
-        //retrieve item_song info
         ContentResolver musicResolver = getContentResolver();
         Uri musicUri = android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         Cursor musicCursor = musicResolver.query(musicUri, null, null, null, null);
         if (musicCursor != null && musicCursor.moveToFirst()) {
-            //get columns
             int titleColumn = musicCursor.getColumnIndex
                     (android.provider.MediaStore.Audio.Media.TITLE);
             int idColumn = musicCursor.getColumnIndex

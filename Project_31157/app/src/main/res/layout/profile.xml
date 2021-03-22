@@ -24,7 +24,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Referensi:"
+        android:text="Referensi Project"
         android:textColor="@color/white"
         android:paddingHorizontal="15dp"/>
     <GridLayout
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_width="320dp"
             android:layout_columnSpan="1"
-            android:text="Daniel Wijaya"
+            android:text="Daniel Wijaya\nStephen \nAndrew Dillon"
             android:textColor="@color/white"/>
     </GridLayout>
 </GridLayout>
